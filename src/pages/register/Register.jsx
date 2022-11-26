@@ -4,14 +4,18 @@ import { useState } from "react";
 import { useRef } from "react";
 
 const Register = () => {
-    const [email, setEmail] = useState('')
-    let emailRef = useRef()
-
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    let emailRef = useRef();
+    let passwordRef = useRef();
 
     const handleOpen = () => {
-    setEmail(emailRef.current.value)
-}
+        setEmail(emailRef.current.value);
+    };
 
+ const handleFinish = () => {
+   setPassword(passwordRef.current.value);
+ };
 
     return (
         <>
@@ -33,10 +37,25 @@ const Register = () => {
                         Ready to watch? Enter your email to create or restart your
                         membership.
                     </p>
-                    <div className="input">
-                        <input type="email" placeholder="Enter your Email Address" ref={emailRef} />
-                        <button  className="registerButton" onClick={handleOpen}> Get Started </button>
-                    </div>
+                    {!email ? (
+                        <div className="input">
+                            <input
+                                type="email"
+                                placeholder="Enter your Email Address"
+                                ref={emailRef}
+                            />
+                            <button className="registerButton" onClick={handleOpen}>Get Started </button>
+                        </div>
+                    ) : (
+                        <form className="input">
+                            <input
+                                type="password"
+                                placeholder="Enter your Password "
+                                ref={passwordRef}
+                            />
+                            <button className="registerButton" onClick={handleFinish}> Start</button>
+                        </form>
+                    )}
                 </div>
             </div>
         </>
